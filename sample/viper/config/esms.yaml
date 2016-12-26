@@ -1,0 +1,44 @@
+port: 9090
+
+db:
+  database: sms
+  host: 10.60.7.225
+  port: 27017
+
+influxdb:
+  interval: 10s
+  address: http://10.60.3.14:8086
+  username: root
+  password: root
+  db: sms
+
+log:
+  host:
+
+partner:
+  esms:
+    url: http://api.esms.vn/MainService.svc/xml/SendMultipleSMS_v3
+    secret_key: 7361BB7E0931CB46A5FC40956129A8
+    api_key: 7A3B083426EC39D62CF28F28284CBB
+    sms_type: 8
+
+  vnet:
+      username: chotot
+      password: cH0$*7t
+      brandname: ChoTot
+      url_send_one: http://sms.vnet.vn:8082/api/sent
+      url_send_multi: http://sms.vnet.vn:8082/api/sentMulti
+      url_get_delivery: http://sms.vnet.vn:8082/api/getDelivery
+      url_get_balance: http://sms.vnet.vn:8082/api/getBalance
+
+profiler:
+  address: 10.60.7.225:8125
+  service: esms
+
+rules:
+  OTP:
+    template: De xac nhan ban su dung ChoTot, hay dien ma xac nhan %s vao may tinh hoac dien thoai cua ban trong vong 3 phut
+    vendor: ESMS
+  FGPW:
+    template: De dat lai mat khau tren ChoTot, hay dien ma xac nhan %s vao may tinh hoac tren dien thoai cua ban trong vong 3 phut
+    vendor: VNET
